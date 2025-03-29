@@ -1,21 +1,20 @@
-# template-composite-action
+# determine-version-level-action
 
-Template repository for Composite Action.
+Auto-determine version bump level from merged PR labels.
 
 <!-- actdocs start -->
 
 ## Description
 
-Template repository for creating Composite Action with GitHub Actions.
+Automatically determines the version bump level (`minor`, `patch`, or `none`)
+from labels on merged pull requests since the last Git tag.
 
 ## Usage
 
-Write usage for your Composite Action.
-
 ```yaml
   steps:
-    - name: Template
-      uses: tmknom/template-composite-action@v0
+    - name: Determine Version Level
+      uses: tmknom/determine-version-level-action@v0
 ```
 
 ## Inputs
@@ -24,13 +23,18 @@ N/A
 
 ## Outputs
 
-N/A
+| Name | Description |
+| :--- | :---------- |
+| bump-level | The determined version bump level (`minor`, `patch`, or `none`). |
 
 <!-- actdocs end -->
 
 ## Permissions
 
-N/A
+| Scope         | Access |
+| :------------ | :----- |
+| contents      | read   |
+| pull-requests | read   |
 
 ## FAQ
 
@@ -44,4 +48,4 @@ N/A
 
 See [GitHub Releases][releases].
 
-[releases]: https://github.com/tmknom/template-composite-action/releases
+[releases]: https://github.com/tmknom/determine-version-level-action/releases
