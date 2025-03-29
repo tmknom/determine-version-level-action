@@ -21,14 +21,12 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
+      pull-requests: read
     steps:
       - name: Checkout
         uses: tmknom/checkout-action@v1
-
-      - name: Setup
-        run: |
-          set -x
-          echo "Setup"
+        with:
+          fetch-depth: 100
 
       - name: Exercise
         id: exercise
@@ -36,13 +34,7 @@ jobs:
 
       - name: Verify
         env:
-          OUTCOME: ${{ steps.exercise.outcome }}
+          BUMP_LEVEL: ${{ steps.exercise.outputs.bump-level }}
         run: |
           set -x
-          test "${OUTCOME}" = "success"
-
-      - name: Teardown
-        if: ${{ always() }}
-        run: |
-          set -x
-          echo "Teardown"
+          test "${BUMP_LEVEL}" = "none"
