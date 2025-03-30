@@ -19,7 +19,9 @@ from labels on merged pull requests since the last Git tag.
 
 ## Inputs
 
-N/A
+| Name | Description | Default | Required |
+| :--- | :---------- | :------ | :------: |
+| revision-range | Filters only pull requests in the specified revision range. | n/a | no |
 
 ## Outputs
 
