@@ -16,12 +16,20 @@ defaults:
 
 jobs:
   test:
-    name: Test
+    name: ${{ matrix.expected }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
       pull-requests: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - revision-range: ca30855e2a5046c5098eea8c423eeddd80da2e46..c59a52fbea284786f0de0bd88b4185dc62027f6d # PR3
+            expected: minor
+          - revision-range: ca30855e2a5046c5098eea8c423eeddd80da2e46..87a66fdb2e8c31cac9e397ab8fc90dd4a3cddffa # PR2
+            expected: none
     steps:
       - name: Checkout
         uses: tmknom/checkout-action@v1
@@ -31,10 +39,13 @@ jobs:
       - name: Exercise
         id: exercise
         uses: ./
+        with:
+          revision-range: ${{ matrix.revision-range }}
 
       - name: Verify
         env:
-          BUMP_LEVEL: ${{ steps.exercise.outputs.bump-level }}
+          ACTUAL: ${{ steps.exercise.outputs.bump-level }}
+          EXPECTED: ${{ matrix.expected }}
         run: |
           set -x
-          test "${BUMP_LEVEL}" = "none"
+          test "${ACTUAL}" = "${EXPECTED}"
