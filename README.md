@@ -21,7 +21,7 @@ from labels on merged pull requests since the last Git tag.
 
 | Name | Description | Default | Required |
 | :--- | :---------- | :------ | :------: |
-| revision-range | Filters only pull requests in the specified revision range. | n/a | no |
+| revision-range | Git revision range (e.g., v1.0.0..main) used to filter merged pull requests. | n/a | no |
 
 ## Outputs
 
