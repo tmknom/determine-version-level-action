@@ -32,7 +32,7 @@ jobs:
             expected: none
     steps:
       - name: Checkout
-        uses: tmknom/checkout-action@v1
+        uses: tmknom/secure-checkout-action@v1
         with:
           fetch-depth: 100
 
